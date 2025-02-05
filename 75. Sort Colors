@@ -1,0 +1,63 @@
+ // my approach (two pass solution)
+
+class Solution {
+    public void sortColors(int[] nums) {
+      int  n=nums.length;
+        int zeros = 0;
+        int ones = 0;
+        int twos = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
+                zeros++;
+            } 
+            else if (nums[i] == 1) {
+                ones++;
+            } 
+            else {
+                twos++;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if(i<zeros){
+                nums[i]=0;
+            }
+            else if(i<zeros+ones){
+                nums[i]=1;
+            }
+            else{
+                nums[i]=2;
+            }
+        }
+        
+    }
+}
+
+
+
+// dutch flag algo approach
+
+class Solution {
+    public void sortColors(int[] arr) {
+        int n = arr.length;
+        int low = 0;
+        int mid = 0;
+        int high = n - 1;
+
+        while (mid <= high) {
+            if (arr[mid] == 0) {
+                int temp = arr[low];
+                arr[low] = arr[mid];
+                arr[mid] = temp;
+                low++;
+                mid++;
+            } else if (arr[mid] == 1) {
+                mid++;
+            } else {
+                int temp = arr[mid];
+                arr[mid] = arr[high];
+                arr[high] = temp;
+                high--;
+            }
+        }
+    }
+}
