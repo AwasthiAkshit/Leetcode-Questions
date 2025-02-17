@@ -1,0 +1,59 @@
+// 1ms code:
+
+class Solution {
+    public int[][] rowFlip(int[][] arr, int r, int l) {
+        for (int i = 0; i < l; i++) {
+            if (arr[r][i] == 0) {
+                arr[r][i] = 1;
+            } else {
+                arr[r][i] = 0;
+            }
+        }
+        return arr;
+    }
+
+    public int[][] flipCol(int[][] arr, int c, int l) {
+        for (int i = 0; i < l; i++) {
+            if (arr[i][c] == 0) {
+                arr[i][c] = 1;
+            } else {
+                arr[i][c] = 0;
+            }
+        }
+        return arr;
+    }
+
+    public int matrixScore(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            if (grid[i][0] == 0) {
+                rowFlip(grid, i, n);
+            }
+        }
+
+        for (int j = 1; j < n; j++) {
+            int count = 0;
+            for (int i = 0; i < m; i++) {
+                if (grid[i][j] == 0) {
+                    count++;
+                }
+            }
+            if (count > m / 2) {
+                flipCol(grid, j, m);
+            }
+        }
+
+        int sum = 0;
+
+        for (int i = 0; i < m; i++) {
+            int decimalValue = 0;
+            for (int j = 0; j < n; j++) {
+                decimalValue = decimalValue * 2 + grid[i][j];
+            }
+            sum = sum + decimalValue;
+        }
+        return sum;
+
+    }
+}
