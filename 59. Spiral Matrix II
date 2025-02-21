@@ -1,0 +1,33 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] arr = new int[n][n];
+        int counter = 1;
+        int sr = 0;
+        int er = n - 1;
+        int sc = 0;
+        int ec = n - 1;
+        while (counter <= n * n) {
+            for (int i = sc; i <= ec; i++) {
+                arr[sr][i] = counter;
+                counter++;
+            }
+            sr++;
+            for (int i = sr; i <= er; i++) {
+                arr[i][ec] = counter;
+                counter++;
+            }
+            ec--;
+            for (int i = ec; i >= sc; i--) {
+                arr[er][i] = counter;
+                counter++;
+            }
+            er--;
+            for (int i = er; i >= sr; i--) {
+                arr[i][sc] = counter;
+                counter++;
+            }
+            sc++;
+        }
+        return arr;
+    }
+}
