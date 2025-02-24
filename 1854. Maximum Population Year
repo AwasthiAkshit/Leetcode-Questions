@@ -1,0 +1,29 @@
+class Solution {
+    public int maximumPopulation(int[][] logs) {
+        int n = logs.length;
+        int[] arr = new int[n];
+        int s = 0; 
+
+        for (int i = 0; i < n; i++) {
+            int year = logs[i][0];
+            int count = 0;
+
+            for (int j = 0; j < n; j++) {
+                if (logs[j][0] <= year && logs[j][1] > year) {
+                    count++;
+                }
+            }
+            arr[i] = count;
+        }
+
+        int max = arr[0];
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i] > max || (arr[i] == max && logs[i][0] < logs[s][0])) {
+                max = arr[i];
+                s = i;
+            }
+        } 
+        return logs[s][0];
+    }
+}
