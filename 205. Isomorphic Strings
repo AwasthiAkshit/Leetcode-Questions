@@ -1,0 +1,40 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+        if (m != n) {
+            return false;
+        }
+        int[] arr = new int[128];
+
+        for (int i = 0; i < m; i++) {
+            int sc = s.charAt(i);
+            int tc = t.charAt(i);
+            if (arr[sc] == 0) {
+                arr[sc] = tc;
+
+            } else {
+                if (arr[sc] != tc) {
+                    return false;
+                }
+            }
+        }
+
+        int[] a = new int[128];
+        for (int i = 0; i < m; i++) {
+            int tc = t.charAt(i);
+            int sc = s.charAt(i);
+            if (a[tc] == 0) {
+                a[tc] = sc;
+
+            } else {
+                if (a[tc] != sc) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+    }
+}
