@@ -63,3 +63,33 @@ class Solution {
 
     }
 }
+
+
+
+// better approach
+class Solution {
+    public int search(int[] arr, int target) {
+        int n = arr.length;
+        int lo = 0;
+        int hi = n - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] <= arr[hi]) {// iam in right side..mid to hi sorted part everytime
+                if (target > arr[mid] && target <= arr[hi]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                }
+            } else if (arr[mid] >= arr[hi]) {// iam in left side..lo to mid sorted part evrytime
+                if (target >= arr[lo] && target < arr[mid]) {
+                    hi = mid - 1;
+                } else {
+                    lo = mid + 1;
+                }
+            }
+        }
+        return -1;
+    }
+}
