@@ -1,0 +1,28 @@
+class Solution {
+    public int celebrity(int mat[][]) {
+        // code here
+        Stack<Integer> st = new Stack<>();
+        int n = mat.length;
+        for(int i=0;i<n;i++) st.push(i);
+        while(st.size()>1){
+            int p1 = st.pop();
+            int p2 = st.pop();
+            if(mat[p1][p2]==0) st.push(p1);
+            else if(mat[p2][p1]==0) st.push(p2);
+        }
+        if(st.size()==0) return -1;
+        int pot = st.pop();
+        for(int i=0;i<n;i++){
+            if(pot==i) continue;
+            if(mat[pot][i]==1) return -1;
+            
+        }
+        for(int i=0;i<n;i++){
+            if(pot==i) continue;
+            if(mat[i][pot]==0){
+                return -1;
+            }
+        }
+        return pot;
+    }
+}
