@@ -1,0 +1,27 @@
+class Solution {
+    public int maxArea(int[] arr) {
+        int i = 0;
+        int j = arr.length - 1;
+        int maxArea = 0;
+        while (i <= j) {
+            if (arr[i] < arr[j]) {
+                int len = arr[i];
+                int width = j - i;
+                int area = len * width;
+                if (area > maxArea) {
+                    maxArea = area;
+                }
+                i++;
+            } else {
+                int len = arr[j];
+                int width = j - i;
+                int area = len * width;
+                if (area > maxArea) {
+                    maxArea = area;
+                }
+                j--;
+            }
+        }
+        return maxArea;
+    }
+}
