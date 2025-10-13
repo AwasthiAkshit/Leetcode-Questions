@@ -1,0 +1,15 @@
+class Solution {
+    public int countKeyChanges(String s) {
+        int count = 0;
+        for(int i=0;i<s.length()-1;i++){
+            char ch1 = s.charAt(i);
+            char ch2 = s.charAt(i+1);
+            int as1 = (int)ch1;
+            int as2 = (int)ch2;
+            if(as2!=(as1-32)&&as2!=(as1+32)&&as1!=as2) count++;
+            
+            
+        }
+        return count;
+    }
+}
