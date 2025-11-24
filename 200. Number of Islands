@@ -1,0 +1,46 @@
+class Solution {
+    private void bfs(int r, int c, char[][] grid, int m, int n) {
+        grid[r][c] = '0';
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] { r, c });
+        while (q.size() > 0) {
+            int[] cell = q.remove();
+            int row = cell[0];
+            int col = cell[1];
+            if (col < m - 1 && grid[row][col + 1] == '1') {
+                q.add(new int[] { row, col + 1 });
+                grid[row][col + 1] = '0';
+            }
+            if (col > 0 && grid[row][col - 1] == '1') {
+                q.add(new int[] { row, col - 1 });
+                grid[row][col - 1] = '0';
+
+            }
+            if (row < n - 1 && grid[row + 1][col] == '1') {
+                q.add(new int[] { row + 1, col });
+                grid[row + 1][col] = '0';
+            }
+            if (row > 0 && grid[row - 1][col] == '1') {
+                q.add(new int[] { row - 1, col });
+                grid[row - 1][col] = '0';
+            }
+        }
+        return;
+    }
+
+    public int numIslands(char[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '1') {
+                    bfs(i, j, grid, m, n);
+                    count++;
+                }
+            }
+
+        }
+        return count;
+    }
+}
