@@ -1,0 +1,26 @@
+// dfs approach.
+class Solution {
+    private void dfs(int i, boolean[] vis, int[][] adj, int n) {
+        vis[i] = true;
+        for (int j = 0; j < n; j++) {
+            if (adj[i][j] == 1 && vis[j] == false) {
+                dfs(j, vis, adj, n);
+            }
+        }
+
+    }
+
+    public int findCircleNum(int[][] adj) {
+        int count = 0;
+        int n = adj.length;
+        boolean[] vis = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            if (vis[i] == false) {
+                dfs(i, vis, adj, n);
+                count++;
+            }
+
+        }
+        return count;
+    }
+}
