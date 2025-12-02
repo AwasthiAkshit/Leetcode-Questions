@@ -1,0 +1,37 @@
+class Solution {
+    private boolean find(int[][] graph,int[] vis,int root,int n){
+        int red = 1;
+        int blue = 2;
+        Queue<Integer> q = new LinkedList<>();
+        vis[root] = 1;
+        q.add(root);
+        while(q.size()>0){
+            int top = q.remove();
+            for(int j=0;j<graph[top].length;j++){
+                if(vis[graph[top][j]]==0){
+                    q.add(graph[top][j]);
+                    if(vis[top]==1) vis[graph[top][j]]=2;
+                    else vis[graph[top][j]]=1;
+                }
+                else{
+                    if(vis[top]==vis[graph[top][j]]) return false;
+                }
+            }
+        }
+       
+        return true;
+    }
+    
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int[] vis = new int[n];
+    
+        for(int i=0;i<n;i++){
+            if(vis[i]==0){
+                if(!find(graph,vis,i,n)) return false;
+            }
+        }
+        return true;
+    }
+        
+}
