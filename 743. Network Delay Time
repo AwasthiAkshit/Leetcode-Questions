@@ -1,0 +1,57 @@
+class Solution {
+    class Pair {
+        int node;
+        int t;
+
+        Pair(int node, int t) {
+            this.node = node;
+            this.t = t;
+        }
+    }
+
+    public int networkDelayTime(int[][] times, int V, int src) {
+        int[] time = new int[V];
+        src = src - 1;
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            time[i] = Integer.MAX_VALUE;
+        }
+        time[src] = 0;
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < times.length; i++) {
+            int u = times[i][0] - 1;
+            Pair p = new Pair(times[i][1] - 1, times[i][2]);
+            adj.get(u).add(p);
+        }
+        PriorityQueue<Pair> h = new PriorityQueue<>((a, b) -> a.t - b.t);
+        h.add(new Pair(src, 0));
+        while (h.size() > 0) {
+            Pair top = h.remove();
+            if (top.t > time[top.node])
+                continue;
+            for (int i = 0; i < adj.get(top.node).size(); i++) {
+                int node = adj.get(top.node).get(i).node;
+                int wt = adj.get(top.node).get(i).t;
+                int total = top.t + wt;
+                if (total < time[node]) {
+                    time[node] = total;
+                    h.add(new Pair(node, total));
+                }
+            }
+        }
+        for (int i = 0; i < time.length; i++) {
+            if (time[i] == Integer.MAX_VALUE)
+                return -1;
+        }
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < time.length; i++) {
+            if (time[i] > max)
+                max = time[i];
+        }
+        return max;
+
+    }
+}
