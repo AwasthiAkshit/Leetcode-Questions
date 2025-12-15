@@ -1,0 +1,61 @@
+class Solution {
+     class Pair {
+        int node;
+        int cost;
+        int k;
+
+        Pair(int node, int cost) {
+            this.node = node;
+            this.cost = cost;
+            
+        }
+    }
+      class trip {
+        int node;
+        int cost;
+        int stops;
+
+        trip(int node, int cost,int stops) {
+            this.node = node;
+            this.cost = cost;
+            this.stops = stops;
+        }
+      }
+
+    public int findCheapestPrice(int V, int[][] flights, int src, int dst, int k) {
+        int[] cost = new int[V];
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            cost[i] = Integer.MAX_VALUE;
+        }
+        cost[src] = 0;
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < flights.length; i++) {
+            int u = flights[i][0];
+            Pair p = new Pair(flights[i][1], flights[i][2]);
+            adj.get(u).add(p);
+        }
+
+        PriorityQueue<trip> h = new PriorityQueue<>((a,b)->a.stops-b.stops);
+        h.add(new trip(src,0,0));
+        while(h.size()>0){
+            trip top = h.remove();
+            if(top.stops==k+1) continue;
+            for(int i=0;i<adj.get(top.node).size();i++){
+                int node = adj.get(top.node).get(i).node;
+                int co = adj.get(top.node).get(i).cost;
+                int total = co+top.cost;
+                if(total<cost[node]){
+                    h.add(new trip(node,total,top.stops+1));
+                    cost[node] = total;
+                }
+            }
+        }
+       if(cost[dst]==Integer.MAX_VALUE) return -1;
+        return cost[dst];
+
+    }
+}
