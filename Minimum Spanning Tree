@@ -1,0 +1,51 @@
+class Solution {
+    class Pair{
+        int node;
+        int wt;
+        Pair(int node,int wt){
+            this.node = node;
+            this.wt = wt;
+        }
+    }
+    
+    class Trip{
+        int node;
+        int par;
+        int wt;
+        Trip(int node,int par,int wt){
+            this.node = node;
+            this.par = par;
+            this.wt = wt;
+        }
+    }
+    public int spanningTree(int V, int[][] edges) {
+        // code here
+        boolean[] vis = new boolean[V];
+        int sum = 0;
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<edges.length;i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int w = edges[i][2];
+            adj.get(u).add(new Pair(v,w));
+            adj.get(v).add(new Pair(u,w));
+        }
+        
+        PriorityQueue<Trip> h = new PriorityQueue<>((a,b)->a.wt-b.wt);
+        h.add(new Trip(0,-1,0));
+        while(h.size()>0){
+            Trip top = h.remove();
+            if(vis[top.node]) continue;
+            if(top.par!=-1) sum = sum+top.wt;
+            vis[top.node] = true;
+            for(Pair p : adj.get(top.node)){
+                if(vis[p.node]==false) h.add(new Trip(p.node,top.node,p.wt));
+            }
+        }
+        return sum;
+        
+    }
+}
