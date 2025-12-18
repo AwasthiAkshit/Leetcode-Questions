@@ -1,0 +1,34 @@
+class Solution {
+    class Pair{
+        int v;
+        int w;
+        double ratio;
+        Pair(int v,int w){
+            this.v = v;
+            this.w = w;
+            this.ratio = (double)v/w;
+        }
+    }
+    public double fractionalKnapsack(int[] val, int[] wt, int capacity) {
+        // code here
+        PriorityQueue<Pair> h = new PriorityQueue<>((a,b)->Double.compare(b.ratio,a.ratio));
+        double sum = 0;
+        for(int i=0;i<val.length;i++){
+            h.add(new Pair(val[i],wt[i]));
+        }
+        while(capacity>0&&h.size()>0){
+            Pair min = h.remove();
+            if(min.w<=capacity){
+                sum = sum+min.v;
+                capacity = capacity-min.w;
+            }
+            else{
+                double frac = min.ratio*capacity;
+                sum = sum+frac;
+                capacity = capacity-capacity;
+            }
+        }
+        return sum;
+        
+    }
+}
