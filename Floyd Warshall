@@ -1,0 +1,18 @@
+// User function template for JAVA
+
+class Solution {
+    public void floydWarshall(int[][] dist) {
+        // Code here
+        int n = dist.length;
+        for(int t=0;t<n;t++){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(i!=j&&i!=t&&j!=t&&dist[i][t]!=(int)Math.pow(10,8)&&dist[t][j]!=(int)Math.pow(10,8)){
+                        int total = dist[i][t]+dist[t][j];
+                        if(total<dist[i][j]) dist[i][j] = total;
+                }
+            }
+        }
+    }
+}
+}
