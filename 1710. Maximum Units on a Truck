@@ -1,0 +1,21 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+        PriorityQueue<int[]> h = new PriorityQueue<>((a,b)->b[1]-a[1]);
+        for(int i=0;i<boxTypes.length;i++){
+            h.add(boxTypes[i]);
+        }
+        int sum = 0;
+        while(truckSize>0&&h.size()>0){
+            int[] top = h.remove();
+            if(top[0]<=truckSize){
+                sum = sum+(top[1]*top[0]);
+                truckSize = truckSize-top[0];
+            }
+            else{
+                sum = sum+(truckSize*top[1]);
+                truckSize = 0;
+            }
+        }
+        return sum;
+    }
+}
