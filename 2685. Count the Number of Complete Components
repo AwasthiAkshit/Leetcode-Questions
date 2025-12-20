@@ -1,0 +1,52 @@
+class Solution {
+    static int[] par;
+    static int[] size;
+    static int[] edge;
+    private int find(int node){
+        if(par[node]==node) return node;
+        int leader = find(par[node]);
+        par[node] = leader;
+        return leader;
+    }
+    private void union(int u,int v){
+        int lu = find(u);
+        int lv = find(v);
+        if(lu!=lv){
+            // union by size(jis comp ka size bda vo leader bndega)
+            if(size[lu]>size[lv]){
+                par[lv] = lu;
+                size[lu]+=size[lv];
+            }
+            else{
+                par[lu] = lv;
+                size[lv]+=size[lu];
+            }
+        }
+    }
+    public int countCompleteComponents(int n, int[][] edges) {
+        int l = edges.length;
+        par = new int[n];
+        size = new int[n];
+        edge = new int[n];
+        for(int i=0;i<n;i++){
+            par[i] = i;
+            size[i] = 1;
+        }
+        for(int i=0;i<l;i++){
+            union(edges[i][0],edges[i][1]);
+        }
+        for(int[] ele:edges){
+            int leader = find(ele[0]);
+            edge[leader]++;
+        }
+        int count = 0;
+        for(int i=0;i<n;i++){
+            if(par[i]==i){
+                int numberOfNodes = size[i];
+                int req = numberOfNodes*(numberOfNodes-1)/2;
+                if(req==edge[i]) count++;
+            }
+        }
+        return count;
+    }
+}
