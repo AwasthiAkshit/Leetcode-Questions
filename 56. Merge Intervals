@@ -1,0 +1,26 @@
+//using heap
+class Solution {
+    public int[][] merge(int[][] intervals) {
+      PriorityQueue<int[]> h = new PriorityQueue<>((a,b)->a[0]-b[0]);
+      ArrayList<int[]> arr = new ArrayList<>();
+      for(int i=0;i<intervals.length;i++){
+        h.add(intervals[i]);
+      }
+      while(h.size()>1){
+        int[] first = h.remove();
+        int[] second = h.remove();
+        if(first[1]>=second[0]){
+            second[0] = first[0];
+            second[1] = Math.max(first[1],second[1]);
+            h.add(second);
+        }
+        else{
+            arr.add(first);
+            h.add(second);
+
+        }
+      }
+      if(h.size()==1) arr.add(h.remove());
+      return arr.toArray(new int[arr.size()][]);
+    }
+}
