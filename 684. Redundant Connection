@@ -1,0 +1,46 @@
+class Solution {
+    static int[] par;
+    static int[] size;
+    int flag = 0;
+    private int find(int node){
+        if(par[node]==node) return node;
+        int leader = find(par[node]);
+        par[node] = leader;
+        return leader;
+    }
+    private void union(int u,int v){
+        int lu = find(u);
+        int lv = find(v);
+        if(lu==lv){
+            flag = 1;
+            return;
+        }
+        else{
+            if(size[lu]>size[lv]){
+                par[lv] = lu;
+                size[lu]+=size[lv];
+            }
+            else{
+                par[lu] = lv;
+                size[lv]+=size[lu];
+            }
+        }
+    }
+    
+    public int[] findRedundantConnection(int[][] edges) {
+        int n = edges.length;
+        par = new int[n+1];
+        size = new int[n+1];
+        par[0] = Integer.MAX_VALUE;
+        size[0] = Integer.MAX_VALUE;
+        for(int i=1;i<n+1;i++){
+            par[i] = i;
+            size[i] = 1;
+        }
+        for(int i=0;i<n;i++){
+            union(edges[i][0],edges[i][1]);
+            if(flag==1) return edges[i];
+        }
+        return edges[n-1];
+    }
+}
