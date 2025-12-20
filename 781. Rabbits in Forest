@@ -1,0 +1,20 @@
+class Solution {
+    public int numRabbits(int[] answers) {
+        int n = answers.length;
+        Arrays.sort(answers);
+        int sum = answers[0]+1;
+        int gang = answers[0];
+        int count = 0;
+        for(int i=1;i<n;i++){
+            if(answers[i-1]!=answers[i]||count==gang){
+                sum = sum+answers[i]+1;
+                gang = answers[i];
+                count = 0;
+            }
+            else{
+                count++;
+            }
+        }
+        return sum;
+    }
+}
