@@ -1,0 +1,60 @@
+class Solution {
+    class Pair {
+        int r, c;
+        Pair(int r, int c) {
+            this.r = r;
+            this.c = c;
+        }
+    }
+
+    private int bfs(int[][] grid, boolean[][] vis, int n, int m, int r, int c) {
+        int count = 1;
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(r, c));
+        vis[r][c] = true;
+
+        while (!q.isEmpty()) {
+            Pair p = q.remove();
+            int i = p.r;
+            int j = p.c;
+
+            if (j > 0 && grid[i][j - 1] == 1 && !vis[i][j - 1]) {
+                q.add(new Pair(i, j - 1));
+                vis[i][j - 1] = true;
+                count++;
+            }
+            if (i > 0 && grid[i - 1][j] == 1 && !vis[i - 1][j]) {
+                q.add(new Pair(i - 1, j));
+                vis[i - 1][j] = true;
+                count++;
+            }
+            if (j < m - 1 && grid[i][j + 1] == 1 && !vis[i][j + 1]) {
+                q.add(new Pair(i, j + 1));
+                vis[i][j + 1] = true;
+                count++;
+            }
+            if (i < n - 1 && grid[i + 1][j] == 1 && !vis[i + 1][j]) {
+                q.add(new Pair(i + 1, j));
+                vis[i + 1][j] = true;
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int maxAreaOfIsland(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        boolean[][] vis = new boolean[n][m];
+        int max = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1 && !vis[i][j]) {
+                    max = Math.max(max, bfs(grid, vis, n, m, i, j));
+                }
+            }
+        }
+        return max;
+    }
+}
