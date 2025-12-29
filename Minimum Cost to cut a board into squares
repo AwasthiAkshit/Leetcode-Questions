@@ -1,0 +1,56 @@
+class Solution {
+    public static int minCost(int n, int m, int[] x, int[] y) {
+        // code here
+        int hp = 1;
+        int vp = 1;
+        int hl = y.length;
+        int vl = x.length;
+        int i = vl-1;
+        int j = hl-1;
+        int cost = 0;
+        Arrays.sort(x);
+        Arrays.sort(y);
+        while(i>=0&&j>=0){
+            if(x[i]>y[j]){
+                cost = cost+x[i]*vp;
+                hp++;
+                i--;
+            }
+            else if(x[i]<y[j]){
+                cost = cost+y[j]*hp;
+                vp++;
+                j--;
+            }
+            else{
+                if(vp<=hp){
+                    cost = cost+x[i]*vp;
+                    hp++;
+                    i--;
+                }
+                else if(hp<vp){
+                    cost = cost+y[j]*hp;
+                    vp++;
+                    j--;
+                }
+                
+            }
+            
+        }
+        if(i<0){
+            while(j>=0){
+                cost = cost+y[j]*hp;
+                vp++;
+                j--;
+            }
+        }
+         else if(j<0){
+            while(i>=0){
+                cost = cost+x[i]*vp;
+                hp++;
+                i--;
+            }
+        }
+        return cost;
+        
+    }
+}
