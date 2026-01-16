@@ -1,0 +1,29 @@
+class Solution {
+    public char getMaxOccuringChar(String s) {
+        // code here
+        HashMap<Character,Integer> map = new HashMap<>();
+        ArrayList<Character> arr = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+            
+        }
+        int max = Integer.MIN_VALUE;
+        char ch = 'a';
+        for(Map.Entry<Character,Integer>e:map.entrySet()){
+            if(e.getValue()>max){
+                max = e.getValue();
+            }
+        }
+        int lex = Integer.MAX_VALUE;
+        for(Map.Entry<Character,Integer>e:map.entrySet()){
+            if(e.getValue()==max){
+                if((int)e.getKey()<lex){
+                    ch = e.getKey();
+                    lex = (int) e.getKey();
+            }
+        }
+        }
+        return ch;
+        
+    }
+}
