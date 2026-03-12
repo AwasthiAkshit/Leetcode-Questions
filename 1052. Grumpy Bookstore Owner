@@ -1,0 +1,28 @@
+class Solution {
+    public int maxSatisfied(int[] cus, int[] gru, int min) {
+        int n = cus.length;
+        int sat = 0;
+        int sum = 0;
+        int maxSum = 0;
+        for(int i=0;i<n;i++){
+            if(gru[i]==0) sat = sat+cus[i];
+        }
+        int i = 0;
+        int j = 0;
+        for(j=0;j<min;j++){
+            if(gru[j]==1) sum = sum+cus[j];
+        }
+        maxSum = Math.max(sum,maxSum);
+        j--;
+        while(j<n-1){
+            if(gru[i]==1) sum = sum-cus[i];
+            i++;
+            if(gru[j+1]==1) sum = sum+cus[j+1];
+            j++;
+            maxSum = Math.max(sum,maxSum);
+
+        }
+        sat = sat+maxSum;
+        return sat;
+    }
+}
