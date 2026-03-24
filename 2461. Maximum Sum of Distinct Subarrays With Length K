@@ -1,0 +1,31 @@
+class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        HashSet<Integer> set = new HashSet<>();
+        int i = 0;
+        int j = 0;
+        long sum = 0;
+        long maxSum = 0;
+        while(j<nums.length&&i<=nums.length-k){
+            if(j-i<k&&!set.contains(nums[j])){
+                set.add(nums[j]);
+                sum = sum+nums[j];
+                j++;
+            }
+            else if(k==j-i){
+                maxSum = Math.max(maxSum,sum);
+                sum = sum-nums[i];
+                set.remove(nums[i]);
+                i++;
+            }
+            else{
+                sum = sum-nums[i];
+                set.remove(nums[i]);
+                i++;
+            }
+        }
+        if(i<=nums.length-k){
+            maxSum = Math.max(sum,maxSum);
+        }
+        return maxSum;
+    }
+}
