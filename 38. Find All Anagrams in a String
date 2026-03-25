@@ -1,0 +1,26 @@
+class Solution {
+    public boolean match(int[]a,int[]b){
+        for(int i=0;i<26;i++){
+        if(a[i]!=b[i])return false;
+        }
+        return true;
+    }
+    public List<Integer> findAnagrams(String s, String p) {
+        int[]count = new int[26];
+        int[]w = new int[26];
+        List<Integer> ans = new ArrayList<>();
+        for(int i=0;i<p.length();i++){
+            count[p.charAt(i)-'a']++;
+        }
+        int l = 0;
+        for(int r=0;r<s.length();r++){
+            w[s.charAt(r)-'a']++;
+            if(r-l+1>p.length()){
+                w[s.charAt(l)-'a']--;
+                l++;
+            }
+            if(match(w,count))ans.add(l);
+        }
+        return ans;
+    }
+}
