@@ -20,6 +20,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Linked List
 |  |
 | ------- |
+| [0002-add-two-numbers](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0002-add-two-numbers) |
 | [0019-remove-nth-node-from-end-of-list](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0019-remove-nth-node-from-end-of-list) |
 | [0021-merge-two-sorted-lists](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0021-merge-two-sorted-lists) |
 | [0141-linked-list-cycle](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0141-linked-list-cycle) |
@@ -29,6 +30,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Recursion
 |  |
 | ------- |
+| [0002-add-two-numbers](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0002-add-two-numbers) |
 | [0021-merge-two-sorted-lists](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0021-merge-two-sorted-lists) |
 | [0206-reverse-linked-list](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0206-reverse-linked-list) |
 ## Two Pointers
@@ -48,4 +50,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | ------- |
 | [1729-find-followers-count](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/1729-find-followers-count) |
 | [2356-number-of-unique-subjects-taught-by-each-teacher](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/2356-number-of-unique-subjects-taught-by-each-teacher) |
+## Math
+|  |
+| ------- |
+| [0002-add-two-numbers](https://github.com/AwasthiAkshit/Leetcode-Questions/tree/master/0002-add-two-numbers) |
 <!---LeetCode Topics End-->
